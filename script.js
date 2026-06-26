@@ -164,9 +164,29 @@
     });
   }
 
+  function setupSparkles() {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    document.querySelectorAll(".sparkles").forEach(function (container) {
+      var count = 18;
+      for (var i = 0; i < count; i++) {
+        var dot = document.createElement("span");
+        dot.className = "sparkle";
+        dot.style.left = Math.random() * 100 + "%";
+        dot.style.top = Math.random() * 100 + "%";
+        dot.style.setProperty("--dur", (3 + Math.random() * 4).toFixed(1) + "s");
+        dot.style.setProperty("--delay", (Math.random() * -5).toFixed(1) + "s");
+        container.appendChild(dot);
+      }
+    });
+  }
+
   setupReveal();
   setupImages();
   setupLightbox();
+  setupSparkles();
   typeHeroTitle();
 
   if (heroKicker) {
