@@ -104,6 +104,8 @@
     });
   }
 
+  var scrollY = 0;
+
   function openLightbox(figure) {
     const image = figure.querySelector("img");
     const isLoaded = figure.classList.contains("is-loaded") && image && image.naturalWidth > 0;
@@ -115,14 +117,20 @@
     lightboxPlaceholder.textContent = placeholder;
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = -scrollY + "px";
+    document.body.style.width = "100%";
   }
 
   function closeLightbox() {
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     lightboxImage.src = "";
-    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, scrollY);
   }
 
   function setupLightbox() {

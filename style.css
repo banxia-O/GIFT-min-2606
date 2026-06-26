@@ -28,6 +28,9 @@ body {
   font-size: 16px;
   line-height: 1.8;
   letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body::before,
@@ -76,7 +79,7 @@ main {
   position: relative;
   display: grid;
   min-height: 100svh;
-  padding: 56px 22px 88px;
+  padding: 56px max(22px, env(safe-area-inset-left)) 88px;
   place-items: center;
   text-align: center;
 }
@@ -262,8 +265,9 @@ main {
   inset: 0;
   display: grid;
   place-items: center;
-  color: rgba(92, 64, 51, 0.72);
-  font-size: 15px;
+  color: rgba(92, 64, 51, 0.52);
+  font-size: 14px;
+  font-style: italic;
   letter-spacing: 0.08em;
   pointer-events: none;
 }
@@ -357,17 +361,24 @@ main {
   position: fixed;
   top: 18px;
   right: 18px;
+  z-index: 21;
   width: 44px;
   height: 44px;
   padding: 0;
   background: rgba(255, 250, 242, 0.92);
   border: 0;
   border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   color: var(--text);
   cursor: pointer;
   font: inherit;
   font-size: 30px;
   line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.lightbox__close:active {
+  transform: scale(0.92);
 }
 
 @keyframes blink {
@@ -409,6 +420,23 @@ main {
   .scene__visual img {
     min-height: 420px;
   }
+}
+
+.site-footer {
+  padding: 24px 18px 32px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+::selection {
+  background: rgba(218, 165, 32, 0.24);
+  color: var(--text);
 }
 
 @media (prefers-reduced-motion: reduce) {
